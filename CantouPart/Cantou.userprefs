@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\test.cs">
+    <Files>
+      <File FileName="Assets\Script\server.cs" Line="53" Column="23" />
+      <File FileName="..\..\..\..\汽车模拟\RandomDriving-master\Assets\Script\CameraControl.cs" Line="21" Column="10" />
+      <File FileName="..\..\Gear\Client\Assets\client.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\test.cs" Line="9" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

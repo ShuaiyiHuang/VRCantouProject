@@ -1,0 +1,93 @@
+﻿using UnityEngine;  
+using System.Collections;  
+
+public class server : MonoBehaviour {  
+	
+	int Port = 10000;  
+	bool start = true;
+	string Message = "";
+	//Vector2 Sc;
+	
+	//OnGUI方法，所有GUI的绘制都需要在这个方法中实现   
+	void OnGUI(){  
+		//Network.peerType是端类型的状态:   
+		//即disconnected, connecting, server 或 client四种   
+		switch(Network.peerType){  
+			//禁止客户端连接运行, 服务器未初始化   
+		case NetworkPeerType.Disconnected:  
+			StartServer();  
+			break;  
+			//运行于服务器端   
+		case NetworkPeerType.Server:  
+			OnServer();  
+			break;  
+			//运行于客户端   
+		case NetworkPeerType.Client:  
+			break;  
+			//正在尝试连接到服务器   
+		case NetworkPeerType.Connecting:  
+			break;  
+		}  
+	}  
+	
+	void StartServer(){  
+		//当用户点击按钮的时候为true   
+		if (start) {  
+			//初始化本机服务器端口，第一个参数就是本机接收多少连接   
+			NetworkConnectionError error = Network.InitializeServer(12,Port,false);  
+			Debug.Log("错误日志"+error);  
+			start = false;
+		}  
+	}  
+	
+	void OnServer(){  
+		//GUILayout.Label("服务端已经运行,等待客户端连接");  
+		//Network.connections是所有连接的玩家, 数组[]   
+		//取客户端连接数.    
+		/*int length = Network.connections.Length;  
+		//按数组下标输出每个客户端的IP,Port   
+		for (int i=0; i<length; i++)  
+		{  
+			GUILayout.Label("客户端"+i);  
+			GUILayout.Label("客户端ip"+Network.connections[i].ipAddress);  
+			GUILayout.Label("客户端端口"+Network.connections[i].port); 
+			GUILayout.Label("切换场景..."); 
+			//Application.LoadLevel("scene01");
+		}  
+		//当用户点击按钮的时候为true   
+		if (GUILayout.Button("                            断开服务器                            ")){  
+			Network.Disconnect();  
+		}  */
+
+		//创建开始滚动视图  
+		//Sc = GUILayout.BeginScrollView(Sc,GUILayout.Width(280),GUILayout.Height(400));  
+		//绘制纹理, 显示内容  
+		//GUILayout.Box(Message);  
+		if (Message == "1") {
+			Application.LoadLevel("scene02");
+		}else if(Message == "2"){
+			Application.LoadLevel("scene01");
+		}
+		//结束滚动视图, 注意, 与开始滚动视图成对出现  
+		//GUILayout.EndScrollView(); 
+	}  
+
+
+	[RPC]  
+	void ReciveMessage(string msg){  
+		//刚从网络接收的数据的相关信息,会被保存到NetworkMessageInfo这个结构中  
+		Message = msg;  
+		//+"时间"+info.timestamp +"网络视图"+info.networkView  
+	}  
+	
+	/* 系统提供的方法，该方法只执行一次 */  
+	// Use this for initialization   
+	void Start () {  
+		
+	}  
+	
+	// Update is called once per frame   
+	void Update () {  
+		
+	}  
+}  
